@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="PasswordManager.MainWindow"
+        x:Class="PasswordManager.Views.MainWindow"
         Title="Password Vault">
         <Grid>
             <!-- These are basically arrays of rows and columns -->
@@ -87,7 +87,8 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Margin="10">
-                        <Button Content="+ Add Password" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                        <Button Content="+ Add Password" Click="AddPasswordButton_Click"
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                     </StackPanel>
                 </Grid>
              </Border>
@@ -118,10 +119,10 @@
                 Margin="5">
                     <StackPanel Margin="10" Orientation="Vertical" Spacing="10">
                         <TextBlock Text="Enter Password Information Here"/>
-                        <TextBox PlaceholderText="Name"/>
-                        <TextBox PlaceholderText="Username"/>
-                        <TextBox PlaceholderText="Password"/>
-                        <TextBox PlaceholderText="Website"/>
+                        <TextBox Name="WebsiteTextBox" PlaceholderText="Website"/>
+                        <TextBox Name="UsernameTextBox" PlaceholderText="Username"/>
+                        <TextBox Name="PasswordTextBox" PlaceholderText="Password"/>
+                        <TextBox Name="NotesTextBox" PlaceholderText="Notes"/>
                         <TextBlock Text="Last Updated: "/>
                     </StackPanel>
                 </Border>
