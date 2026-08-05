@@ -4,22 +4,140 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="PasswordManager.MainWindow"
-        Title="PasswordManager">
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Margin="20">
-                <Border
-                    Background="gray"
-                    BorderBrush="black"
-                    BorderThickness="5"
-                    CornerRadius="5">
-                    <TextBlock Text="Welcome to Avalonia!"/>
-                </Border>
-                <Button Content="Save"/>
-            </StackPanel>
+        Title="Password Vault">
+        <Grid>
+            <!-- These are basically arrays of rows and columns -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <StackPanel Margin="40">
-                <TextBlock Text="This is the second stack panel"/>
-            </StackPanel>
-        </StackPanel>
-    
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="225"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Top Bar of the App-->
+            <Border Grid.Row="0" 
+            Grid.ColumnSpan="3"
+            Background="gray"
+            BorderBrush="black"
+            BorderThickness="2"
+            Margin="1">
+                <TextBox PlaceholderText="Search Passwords" 
+                Width="500"
+                Height="30"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+            </Border>
+
+            <!-- First panel from left -->
+            <Border Grid.Row="1" 
+            Grid.Column="0"
+            Background="LightGreen"
+            BorderBrush="black"
+            BorderThickness="2"
+            Margin="1">
+            <!-- Another grid in order to separate the settings button -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="10">
+                    <TextBlock Text="Menu Panel" HorizontalAlignment="Center" TextElement.FontWeight="Bold"/>
+                </StackPanel>
+
+                <StackPanel Spacing="10" Margin="10" Grid.Row="1">
+                    <Button Content="Favourites" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button Content="Passwords" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button Content="Secure Notes" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Margin="10" Grid.Row="2">
+                    <Button Content="Settings" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+                
+            </Border>
+
+            <!-- Second panel from left -->
+             <Border Grid.Row="1" 
+             Grid.Column="1"
+             Background="LightBlue"
+             BorderBrush="black"
+             BorderThickness="2"
+             Margin="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="10">
+                        <TextBlock Text="Saved Passwords" HorizontalAlignment="Center" TextElement.FontWeight="Bold"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Margin="10">
+                        <ListBox/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Margin="10">
+                        <Button Content="+ Add Password" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+             </Border>
+
+            <!-- Third Panel from left -->
+             <Border Grid.Row="1" 
+             Grid.Column="2"
+             Background="LightCoral"
+             BorderBrush="Black"
+             BorderThickness="2"
+             Margin="1">
+
+             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="10">
+                    <TextBlock Text="Content" HorizontalAlignment="Center" TextElement.FontWeight="Bold"/>
+                </StackPanel>
+
+                <Border Grid.Row="1" 
+                Background="LightSlateGray"
+                BorderBrush="black"
+                BorderThickness="2"
+                Margin="5">
+                    <StackPanel Margin="10" Orientation="Vertical" Spacing="10">
+                        <TextBlock Text="Enter Password Information Here"/>
+                        <TextBox PlaceholderText="Name"/>
+                        <TextBox PlaceholderText="Username"/>
+                        <TextBox PlaceholderText="Password"/>
+                        <TextBox PlaceholderText="Website"/>
+                        <TextBlock Text="Last Updated: "/>
+                    </StackPanel>
+                </Border>
+                
+                <Grid Grid.Row="2" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Content="Edit" Grid.Column="0" HorizontalAlignment="Left" Width="75" HorizontalContentAlignment="Center"/>
+                    <Button Content="Delete" Grid.Column="1" HorizontalAlignment="Right" Width="75" HorizontalContentAlignment="Center"/>
+                </Grid>
+
+             </Grid>
+            
+             </Border>
+        </Grid>
 </Window>
