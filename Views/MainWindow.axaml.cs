@@ -19,14 +19,15 @@ public partial class MainWindow : Window
     }
 
     //So you need to give your button a name and name the method the same name
-    private void AddPasswordButton_Click(object sender, RoutedEventArgs e)
+    private void AddPasswordButton_Click(object? sender, RoutedEventArgs e)
     {
         Console.WriteLine("Add Password button clicked");
 
-        string website = WebsiteTextBox.Text;
-        string username = UsernameTextBox.Text;
-        string password = PasswordTextBox.Text;
-        string notes = NotesTextBox.Text; 
+        //The meaning of this '?? ""' is if Text has a value then use it else if it's null then use ""
+        string website = WebsiteTextBox.Text ?? "";
+        string username = UsernameTextBox.Text ?? "";
+        string password = PasswordTextBox.Text ?? "";
+        string notes = NotesTextBox.Text ?? "";
 
         Console.WriteLine("Website: " + website);
         Console.WriteLine("Username: " + username);
