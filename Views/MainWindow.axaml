@@ -1,8 +1,8 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:models="using:PasswordManager.Models"
+        Width="1100" 
+        Height="750"
         x:Class="PasswordManager.Views.MainWindow"
         Title="Password Vault">
         <Grid>
@@ -13,8 +13,8 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="225"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -71,25 +71,32 @@
              BorderBrush="black"
              BorderThickness="2"
              Margin="1">
+             
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0" Margin="10">
-                        <TextBlock Text="Saved Passwords" HorizontalAlignment="Center" TextElement.FontWeight="Bold"/>
-                    </StackPanel>
+                    <TextBlock Grid.Row="0" Margin="10"
+                    Text="Saved Passwords" 
+                    HorizontalAlignment="Center" 
+                    TextElement.FontWeight="Bold"/>
 
-                    <StackPanel Grid.Row="1" Margin="10">
-                        <ListBox/>
-                    </StackPanel>
+                    <ListBox Name="PasswordListBox" Grid.Row="1" Margin="10" SelectionChanged="PasswordListBox_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="models:PasswordEntry">
+                                <TextBlock Text="{Binding Website}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
-                    <StackPanel Grid.Row="2" Margin="10">
-                        <Button Content="+ Add Password" Click="AddPasswordButton_Click"
-                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
-                    </StackPanel>
+                    <Button Grid.Row="2" Margin="10"
+                    Content="+ Add Password" 
+                    Click="AddPasswordButton_Click"
+                    HorizontalAlignment="Stretch" 
+                    HorizontalContentAlignment="Center"/>
                 </Grid>
              </Border>
 
@@ -103,9 +110,9 @@
 
              <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Margin="10">
@@ -118,12 +125,25 @@
                 BorderThickness="2"
                 Margin="5">
                     <StackPanel Margin="10" Orientation="Vertical" Spacing="10">
-                        <TextBlock Text="Enter Password Information Here"/>
-                        <TextBox Name="WebsiteTextBox" PlaceholderText="Website"/>
-                        <TextBox Name="UsernameTextBox" PlaceholderText="Username"/>
-                        <TextBox Name="PasswordTextBox" PlaceholderText="Password"/>
-                        <TextBox Name="NotesTextBox" PlaceholderText="Notes"/>
-                        <TextBlock Text="Last Updated: "/>
+                        <TextBlock x:DataType="models:PasswordEntry">           
+                            <Run Text="Password information for: "/>
+                            <Run Text="{Binding Website}" FontWeight="Bold" Foreground="Blue"/>
+                        </TextBlock>
+
+                        <TextBox Name="DisplayWebsiteBox" PlaceholderText="Website" IsReadOnly="True"/>
+                        <TextBox Name="DisplayUsernameBox" PlaceholderText="Username" IsReadOnly="True"/>
+
+                        <TextBox Name="DisplayPasswordBox" 
+                        PlaceholderText="Password" 
+                        PasswordChar="*"
+                        IsReadOnly="True"/>
+
+                        <TextBox Name="DisplayNotesBox" PlaceholderText="Notes" 
+                        IsReadOnly="True"
+                        TextWrapping="Wrap"
+                        Height="100"/>
+
+                        <TextBlock Name="DisplayDateLastModified" Text="Last Updated: " FontWeight="Bold"/>
                     </StackPanel>
                 </Border>
                 

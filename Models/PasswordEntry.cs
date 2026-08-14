@@ -3,6 +3,7 @@ using System;
 
 namespace PasswordManager.Models;
 
+//This describes what one password looks like, the data a password has
 public class PasswordEntry
 {
     public string Website {get; set;} = "";

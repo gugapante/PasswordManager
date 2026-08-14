@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using PasswordManager.Models;
 using PasswordManager.Services;
 
 //This means that this script belongs in the 'Views' Folder
@@ -21,17 +23,47 @@ public partial class MainWindow : Window
     //So you need to give your button a name and name the method the same name
     private void AddPasswordButton_Click(object? sender, RoutedEventArgs e)
     {
-        Console.WriteLine("Add Password button clicked");
+        //We need to pass the service and 'this' mainwindow to the popup
+        var addPasswordWindow = new AddPasswordWindow(passwordManagerService, this);
+        addPasswordWindow.Show();
+    }
 
-        //The meaning of this '?? ""' is if Text has a value then use it else if it's null then use ""
-        string website = WebsiteTextBox.Text ?? "";
-        string username = UsernameTextBox.Text ?? "";
-        string password = PasswordTextBox.Text ?? "";
-        string notes = NotesTextBox.Text ?? "";
+    private void PasswordListBox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (PasswordListBox.SelectedItem != null)
+        {
+            PasswordEntry selectedEntry = (PasswordEntry)PasswordListBox.SelectedItem;
 
-        Console.WriteLine("Website: " + website);
-        Console.WriteLine("Username: " + username);
-        Console.WriteLine("Password: " + password);
-        Console.WriteLine("Notes: " + notes);
+            DisplayWebsiteBox.Text = selectedEntry.Website;
+            DisplayUsernameBox.Text = selectedEntry.Username;
+            DisplayPasswordBox.Text = selectedEntry.Password;
+            DisplayNotesBox.Text = selectedEntry.Notes;
+
+            DisplayDateLastModified.Text = $"Last Updated: {selectedEntry.LastUpdated:G}";
+        }
+        else
+        {
+            Clear();
+        }
+    }
+
+    private void ShowPasswordToggle(object? sender, RoutedEventArgs e)
+    {
+        DisplayPasswordBox.RevealPassword = !DisplayPasswordBox.RevealPassword;
+    }
+
+    public void RefreshList()
+    {
+        PasswordListBox.ItemsSource = null;
+        PasswordListBox.ItemsSource = passwordManagerService.GetPasswords();
+        Clear();
+    }
+    public void Clear()
+    {
+        DisplayWebsiteBox.Text = null;
+        DisplayUsernameBox.Text = null;
+        DisplayPasswordBox.Text = null;
+        DisplayNotesBox.Text = null;
+        DisplayDateLastModified.Text = "Last Updated: ";
     }
 }
