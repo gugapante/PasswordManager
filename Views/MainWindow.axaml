@@ -153,8 +153,14 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Content="Edit" Grid.Column="0" HorizontalAlignment="Left" Width="75" HorizontalContentAlignment="Center"/>
-                    <Button Content="Delete" Grid.Column="1" HorizontalAlignment="Right" Width="75" HorizontalContentAlignment="Center"/>
+                    <Button Content="Edit"
+                    Click="EditButton_Click" 
+                    Grid.Column="0" 
+                    HorizontalAlignment="Left" Width="75" HorizontalContentAlignment="Center"/>
+                    <Button Content="Delete"
+                    Click="DeleteButton_Click" 
+                    Grid.Column="1" 
+                    HorizontalAlignment="Right" Width="75" HorizontalContentAlignment="Center"/>
                 </Grid>
 
              </Grid>

@@ -6,6 +6,7 @@ namespace PasswordManager.Models;
 //This describes what one password looks like, the data a password has
 public class PasswordEntry
 {
+    public Guid ID {get; set;} = Guid.NewGuid();
     public string Website {get; set;} = "";
     public string Username {get; set;} = "";
     public string Password {get; set;} = "";

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using PasswordManager.Models;
@@ -52,10 +53,35 @@ public partial class MainWindow : Window
         DisplayPasswordBox.RevealPassword = !DisplayPasswordBox.RevealPassword;
     }
 
+    private void EditButton_Click(object? sender, RoutedEventArgs e)
+    {
+        if (PasswordListBox.SelectedItem != null)
+        {
+            PasswordEntry selectedEntry = (PasswordEntry)PasswordListBox.SelectedItem;
+            //need to get the password info to pop up on the add password window
+        }
+    }
+
+    private void DeleteButton_Click(object? sender, RoutedEventArgs e)
+    {
+        //Still need to add a pop up confirmation before deleting entry
+        if (PasswordListBox.SelectedItem != null)
+        {
+            PasswordEntry selectedEntry = (PasswordEntry)PasswordListBox.SelectedItem;
+            passwordManagerService.RemovePassword(selectedEntry);
+            
+            RefreshList();
+        }
+    }
+
     public void RefreshList()
     {
+        //This just deselects the currently selected item
+        PasswordListBox.SelectedItem = null;
         PasswordListBox.ItemsSource = null;
-        PasswordListBox.ItemsSource = passwordManagerService.GetPasswords();
+        //The .ToList() forces avalonia to redraw the UI. 
+        //I was deleting the entry from the List but for some reason it wasn't redrawing the UI
+        PasswordListBox.ItemsSource = passwordManagerService.GetPasswords().ToList();
         Clear();
     }
     public void Clear()
