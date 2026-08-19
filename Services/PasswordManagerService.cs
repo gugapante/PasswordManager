@@ -18,6 +18,7 @@ public class PasswordManagerService
 
     public void RemovePassword(PasswordEntry entry)
     {
+        //Checks that randomly generated identifier matches the selected one to the one in the list and removes it
         var itemToRemove = passwordList.FirstOrDefault(p => p.ID == entry.ID);
 
         if (itemToRemove != null)
@@ -25,8 +26,6 @@ public class PasswordManagerService
             passwordList.Remove(itemToRemove);
         }
     }
-
-        
 
     //We also need a method to return the current list of passwords
     public List<PasswordEntry> GetPasswords()

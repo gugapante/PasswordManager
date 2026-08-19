@@ -26,7 +26,7 @@ public partial class MainWindow : Window
     {
         //We need to pass the service and 'this' mainwindow to the popup
         var addPasswordWindow = new AddPasswordWindow(passwordManagerService, this);
-        addPasswordWindow.Show();
+        addPasswordWindow.ShowDialog(this);
     }
 
     private void PasswordListBox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -59,6 +59,11 @@ public partial class MainWindow : Window
         {
             PasswordEntry selectedEntry = (PasswordEntry)PasswordListBox.SelectedItem;
             //need to get the password info to pop up on the add password window
+
+            //This didn't seem to work as it is likely creating a new instance of the window maybe?
+            var addPasswordWindow = new AddPasswordWindow(passwordManagerService, this, selectedEntry);
+            //ShowDialog(this) is better than just Show() as it disables the mainwindow whilst the popup window is open
+            addPasswordWindow.ShowDialog(this);
         }
     }
 

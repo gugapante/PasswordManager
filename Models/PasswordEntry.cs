@@ -6,6 +6,7 @@ namespace PasswordManager.Models;
 //This describes what one password looks like, the data a password has
 public class PasswordEntry
 {
+    //This is a randomly generated identifier attached to each entry. This allows us to track which entry is currently selected and delete/edit it
     public Guid ID {get; set;} = Guid.NewGuid();
     public string Website {get; set;} = "";
     public string Username {get; set;} = "";
