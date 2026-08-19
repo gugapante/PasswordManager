@@ -133,10 +133,20 @@
                         <TextBox Name="DisplayWebsiteBox" PlaceholderText="Website" IsReadOnly="True"/>
                         <TextBox Name="DisplayUsernameBox" PlaceholderText="Username" IsReadOnly="True"/>
 
-                        <TextBox Name="DisplayPasswordBox" 
-                        PlaceholderText="Password" 
-                        PasswordChar="*"
-                        IsReadOnly="True"/>
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBox Name="DisplayPasswordBox" 
+                            PlaceholderText="Password" 
+                            PasswordChar="*"
+                            IsReadOnly="True"
+                            Grid.Column="0"/>
+
+                            <Button Content="View" Name="DisplayPasswordToggle" 
+                            Click="DisplayPasswordToggle_Click"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Grid.Column="1"
+                            Margin="5,0,0,0"/>
+                        </Grid>
 
                         <TextBox Name="DisplayNotesBox" PlaceholderText="Notes" 
                         IsReadOnly="True"

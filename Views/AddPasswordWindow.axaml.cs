@@ -9,9 +9,19 @@ namespace PasswordManager.Views;
 public partial class AddPasswordWindow : Window
 {
 
-    private PasswordManagerService passwordManagerService;
-    private MainWindow mainWindow;
+    private PasswordManagerService? passwordManagerService;
+    private MainWindow? mainWindow;
     private PasswordEntry? entryToEdit;
+
+    private PasswordGeneratorService passwordGeneratorService = new PasswordGeneratorService();
+
+    //Parameterless constructor so that I can actually visualise the window in the previewer
+     public AddPasswordWindow()
+     {
+         InitializeComponent();
+         //I believe we don't need to initialise it in every single constructor as they're overloaded so they should inherit
+    }
+
     public AddPasswordWindow(PasswordManagerService passwordManagerService, MainWindow mainWindow)
     {
         InitializeComponent();
@@ -98,7 +108,7 @@ public partial class AddPasswordWindow : Window
                     LastUpdated = DateTime.Now
                 };
 
-                passwordManagerService.AddPassword(entry);
+                passwordManagerService?.AddPassword(entry);
             }
         }
         //Else, there must be an entry selected so we edit it
@@ -112,9 +122,25 @@ public partial class AddPasswordWindow : Window
         }
 
         //Calls the refresh method
-        mainWindow.RefreshList();
+        mainWindow?.RefreshList();
         //Closes this popup window and sends the data in entry back to mainwindow
         Close();
+    }
+
+    private void ViewPassword_Click(object? sender, RoutedEventArgs e)
+    {
+        PasswordTextBox.RevealPassword = !PasswordTextBox.RevealPassword;
+    }
+
+    private void GeneratePassword_Click(object? sender, RoutedEventArgs e)
+    {
+        bool useSpecials = IncludeSpecialsToggleSwitch.IsChecked ?? true;
+
+        int passwordLength = (int)PasswordLengthSlider.Value;
+
+        PasswordTextBox.RevealPassword = false;
+        
+        PasswordTextBox.Text = passwordGeneratorService.GeneratePassword(passwordLength, useSpecials);
     }
 
     private void CloseNewPassword_Click(object? sender, RoutedEventArgs e)

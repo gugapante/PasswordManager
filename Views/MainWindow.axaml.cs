@@ -48,7 +48,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void ShowPasswordToggle(object? sender, RoutedEventArgs e)
+    private void DisplayPasswordToggle_Click(object? sender, RoutedEventArgs e)
     {
         DisplayPasswordBox.RevealPassword = !DisplayPasswordBox.RevealPassword;
     }
