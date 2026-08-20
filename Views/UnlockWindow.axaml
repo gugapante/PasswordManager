@@ -1,0 +1,27 @@
+<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Unlock Vault" Width="400" Height="300"
+    x:Class="PasswordManager.Views.UnlockWindow"
+    WindowStartupLocation="CenterScreen" CanResize="False">
+
+    <Window.Styles>
+        <Style Selector="TextBox.error">
+            <Setter Property="BorderBrush" Value="red"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="PlaceholderForeground" Value="red"/>
+        </Style>
+    </Window.Styles>
+
+    <StackPanel>
+        <TextBlock Text="Master Password Required..."/>
+
+        <TextBox Name="MasterPasswordBox" 
+        PlaceholderText="Enter password"/>
+
+        <Button Name="UnlockButton" 
+        Click="UnlockButton_Click"
+        Content="Unlock"/>
+    </StackPanel>
+
+</Window>

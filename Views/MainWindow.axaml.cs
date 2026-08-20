@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -19,14 +17,17 @@ public partial class MainWindow : Window
 
         //This then declares the variable as an object of name 'passwordManagerService' of type 'PasswordManagerService'
         passwordManagerService = new PasswordManagerService();
+        RefreshList();
     }
 
     //So you need to give your button a name and name the method the same name
     private void AddPasswordButton_Click(object? sender, RoutedEventArgs e)
     {
         //We need to pass the service and 'this' mainwindow to the popup
+        DisplayPasswordBox.RevealPassword = false;
         var addPasswordWindow = new AddPasswordWindow(passwordManagerService, this);
         addPasswordWindow.ShowDialog(this);
+        PasswordListBox.SelectedItem = null;
     }
 
     private void PasswordListBox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -57,6 +58,8 @@ public partial class MainWindow : Window
     {
         if (PasswordListBox.SelectedItem != null)
         {
+            DisplayPasswordBox.RevealPassword = false;
+
             PasswordEntry selectedEntry = (PasswordEntry)PasswordListBox.SelectedItem;
             //need to get the password info to pop up on the add password window
 
@@ -65,6 +68,7 @@ public partial class MainWindow : Window
             //ShowDialog(this) is better than just Show() as it disables the mainwindow whilst the popup window is open
             addPasswordWindow.ShowDialog(this);
         }
+        PasswordListBox.SelectedItem = null;
     }
 
     private void DeleteButton_Click(object? sender, RoutedEventArgs e)

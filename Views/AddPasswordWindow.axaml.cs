@@ -109,6 +109,7 @@ public partial class AddPasswordWindow : Window
                 };
 
                 passwordManagerService?.AddPassword(entry);
+                passwordManagerService?.SaveToFile();
             }
         }
         //Else, there must be an entry selected so we edit it
@@ -119,6 +120,8 @@ public partial class AddPasswordWindow : Window
             entryToEdit.Password = PasswordTextBox.Text ?? "";
             entryToEdit.Notes = NotesTextBox.Text ?? "";
             entryToEdit.LastUpdated = DateTime.Now;
+
+            passwordManagerService?.SaveToFile();
         }
 
         //Calls the refresh method
